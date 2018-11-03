@@ -89,7 +89,7 @@ environment:
       Z3_PKG_NAME: z3-4.6.0-x64-win
 
 install:
-  - set PATH=%PYTHON%;%PATH%
+  - cmd: set PATH=%PYTHON%;%PATH%
   - cmd: cd C:\projects\triton
   - cmd: mkdir build
   - cmd: cd build
@@ -97,7 +97,7 @@ install:
   - cmd: appveyor DownloadFile https://github.com/Z3Prover/z3/releases/download/z3-4.6.0/%Z3_PKG_NAME%.zip
   - cmd: 7z x %Z3_PKG_NAME%.zip
     # Install z3 in the path
-  - set PATH=C:\projects\triton\build\%Z3_PKG_NAME%\bin;%PATH%
+  - cmd: set PATH=C:\projects\triton\build\%Z3_PKG_NAME%\bin;%PATH%
   - cmd: echo Downloading capstone...
   - cmd: appveyor DownloadFile https://github.com/aquynh/capstone/archive/3.0.4.zip
   - cmd: 7z x 3.0.4.zip

@@ -26,7 +26,7 @@ endif()
 #Enable ctest
 include(CTest)
 
-set(PYTHONPATH_CMD ${CMAKE_COMMAND} -E env PYTHONPATH=${CMAKE_CURRENT_BINARY_DIR}/src/libtriton/${CMAKE_CFG_INTDIR}/)
+set(PYTHONPATH_CMD ${CMAKE_COMMAND} -E env PYTHONPATH=${CMAKE_CURRENT_BINARY_DIR}/src/libtriton/${CMAKE_CFG_INTDIR}/:${PYTHONPATH})
 
 if(PYTHON_BINDINGS)
     find_package(PythonInterp 2.7 REQUIRED)
