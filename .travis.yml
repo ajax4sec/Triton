@@ -131,11 +131,6 @@ before_install:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then wget https://github.com/Z3Prover/z3/releases/download/z3-4.6.0/${Z3_PKG}.zip; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then unzip ${Z3_PKG}.zip; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get install python-setuptools; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then export PYTHONPATH=$PYTHONPATH:$PWD/${Z3_PKG}/bin/python; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then export PYTHONPATH=$PYTHONPATH:$PWD/${Z3_PKG}/bin; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo ln -s $PWD/${Z3_PKG}/bin/python/z3 $(python -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")/z3; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo ln -s $PWD/${Z3_PKG}/bin/libz3.so $(python -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())"); fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo ln -s $PWD/${Z3_PKG}/bin/libz3.so /usr/lib/libz3.so; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then echo $(python -c 'import sys; print sys.path'); fi
   - export CC="$C_COMPILER"
   - export CXX="$CXX_COMPILER"
@@ -183,6 +178,8 @@ script:
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then cmake $(echo 'from os.path import abspath, join; from distutils.sysconfig import get_python_inc, get_python_lib; print "-DPYTHON_INCLUDE_DIR=%s -DPYTHON_LIBRARY=%s" % (get_python_inc(), abspath(join(get_python_lib(), "../../libpython2.7.dylib")))' | python) ..; fi
   - make -j2
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo sh -c "echo 0 > /proc/sys/kernel/yama/ptrace_scope"; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then export PYTHONPATH=$PYTHONPATH:/home/travis/build/JonathanSalwan/Triton/${Z3_PKG}/bin; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then export PYTHONPATH=$PYTHONPATH:/home/travis/build/JonathanSalwan/Triton/${Z3_PKG}/bin/python; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then mkdir -p /Users/travis/Library/Python/2.7/lib/python/site-packages; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then echo 'import site; site.addsitedir("/usr/local/lib/python2.7/site-packages")' >> /Users/travis/Library/Python/2.7/lib/python/site-packages/homebrew.pth; fi
   - travis_wait 60 make check
