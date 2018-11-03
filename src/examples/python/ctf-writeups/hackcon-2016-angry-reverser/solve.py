@@ -71,6 +71,10 @@ import os
 
 from triton import *
 
+for x in sys.path:
+    print x
+
+
 TARGET = os.path.join(os.path.dirname(__file__), 'yolomolo')
 DEBUG  = True
 SERIAL = str()
