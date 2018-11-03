@@ -98,6 +98,7 @@ install:
   - cmd: 7z x %Z3_PKG_NAME%.zip
     # Install z3 in the path
   - set PATH=C:\projects\triton\build\%Z3_PKG_NAME%\bin;%PATH%
+  - set PYTHONPATH=C:\projects\triton\build\%Z3_PKG_NAME%\bin;%PYTHONPATH%
   - set PYTHONPATH=C:\projects\triton\build\%Z3_PKG_NAME%\bin\python;%PYTHONPATH%
   - cmd: echo Downloading capstone...
   - cmd: appveyor DownloadFile https://github.com/aquynh/capstone/archive/3.0.4.zip
