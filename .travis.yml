@@ -131,7 +131,8 @@ before_install:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then wget https://github.com/Z3Prover/z3/releases/download/z3-4.6.0/${Z3_PKG}.zip; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then unzip ${Z3_PKG}.zip; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get install python-setuptools; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then echo $(python -c 'import sys; print sys.path'); fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo cp ${Z3_PKG}/bin/libz3.so /usr/local/lib/python2.7/dist-packages ; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo cp -r ${Z3_PKG}/bin/python/z3 /usr/local/lib/python2.7/dist-packages ; fi
   - export CC="$C_COMPILER"
   - export CXX="$CXX_COMPILER"
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then export PREFIX="/usr/local"; fi
